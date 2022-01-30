@@ -1,0 +1,385 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Diologo/Dialog_system/fonts/GOUDYSTO.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Diologo/sfx/menu_101.wav" type="AudioStream" id=2]
+[ext_resource path="res://Diologo/sfx/Thunder.wav" type="AudioStream" id=3]
+[ext_resource path="res://Diologo/Dialog_system/text_bg/dialog-background.png" type="Texture" id=4]
+[ext_resource path="res://assets/qjCza6.png" type="Texture" id=5]
+[ext_resource path="res://assets/Ludum_Dare_Logo.png" type="Texture" id=6]
+[ext_resource path="res://assets/fVS+lk.png" type="Texture" id=7]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+func _ready():
+	$transition.play(\"transition\")
+	yield($transition,\"animation_finished\")
+"
+
+[sub_resource type="Animation" id=2]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("sfx:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("sfx:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("sfx:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("sfx:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("sfx:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Control
+
+enum {on_dialog,out_dialog}
+var status = out_dialog
+var wait_time = 2
+
+onready var dialog = [
+	\"~Olá! Aqui quem fala é o game designer!\",
+	\"~Aparentemente, a primeira jam de vocês não foi muito boa, né?\",
+	\"~Mas sei lá... Tenta não desamimar muito...\",
+	\"~Com trabalho duro, creio que é possível conseguir bons resultados =)\",
+	\"~Agora volte para o seu quarto e pratique mais um pouco ;D\",
+	\"~Tente relaxar no sofá, olhar pela janela, sair ou entrar em uma jam menor pelo seu computador ;D\",
+	\"~Todas as semanas tem algum evento que você pode participar para adquirir experiência\",
+	\"~Mas o que? O senhor das games jams??????? Isso é insanidade!!\"
+]
+
+var dialog_index = 0
+var finished = false
+var counter = 0 
+
+	
+func _process(delta):
+	
+	if Input.is_action_just_pressed(\"ui_accept\") or Input.is_action_just_pressed(\"atack\") and status == out_dialog:
+		dialog_events()
+		load_dialog()
+		
+		
+
+
+	
+func load_dialog():
+	if dialog_index < dialog.size():
+		status = on_dialog
+		$\"../dialogue_timer\".start()
+		finished = false
+		$RichTextLabel.bbcode_text = dialog[dialog_index]
+		$RichTextLabel.percent_visible = 0
+		$RichTextLabel.push_align(RichTextLabel.ALIGN_CENTER)
+		$Tween.interpolate_property(
+			$RichTextLabel, \"percent_visible\", 0, 1, wait_time,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Tween.start()
+		yield($RichTextLabel,\"draw\")
+		
+	dialog_index += 1
+	counter += 1 
+
+func _on_Tween_tween_completed(object, key):
+	finished = true
+	
+func dialog_events():
+	#if counter < 6 and counter != 3:
+	$\"../AnimationPlayer\".play(\"Event1\")	
+	
+	#elif counter == 3:
+	#	$\"../AnimationPlayer\".play(\"Event2\")
+		
+	if counter == 7:
+		$\"../../transition\".play(\"event\")
+		
+	elif counter == 8:
+		get_tree().change_scene(\"res://Scenes/TItle_screen.tscn\")
+
+
+	#elif counter > 10 && counter < dialog.size():
+	#	$\"../AnimationPlayer\".play(\"Event5\")
+
+#	elif counter == (dialog.size() - 1):
+#		$\"../AnimationPlayer\".play(\"Event2\")
+#		#yield($\"../AnimationPlayer\",\"animation_finished\")
+	
+	
+	#wait_time  = $\"../AnimationPlayer\".current_animation_length
+	$\"../dialogue_timer\".wait_time = wait_time
+
+func _on_dialogue_timer_timeout():
+	status = out_dialog
+"
+
+[sub_resource type="DynamicFont" id=8]
+size = 18
+outline_size = 2
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=9]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("game_jams:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("game_jams:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "transition"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0.403922, 0.690196, 0.996078, 1 ) ]
+}
+
+[node name="pos_intro" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="game_jams" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="TrljMqH" type="Sprite" parent="game_jams"]
+position = Vector2( 512, 300 )
+scale = Vector2( 0.505556, 0.505556 )
+texture = ExtResource( 5 )
+
+[node name="Ludum_Dare_Logo" type="Sprite" parent="game_jams"]
+position = Vector2( 156, 120 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 6 )
+
+[node name="fVS+lk" type="Sprite" parent="game_jams"]
+position = Vector2( 868, 105 )
+scale = Vector2( 0.199905, 0.199905 )
+texture = ExtResource( 7 )
+
+[node name="Control" type="Control" parent="."]
+margin_top = 408.0
+margin_right = 40.0
+margin_bottom = 448.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
+anims/Event1 = SubResource( 2 )
+anims/Event2 = SubResource( 3 )
+anims/Event3 = SubResource( 4 )
+anims/Event4 = SubResource( 5 )
+anims/Event5 = SubResource( 6 )
+
+[node name="Dialog_box" type="Control" parent="Control"]
+margin_left = 2.7937
+margin_top = 505.921
+margin_right = 1023.79
+margin_bottom = 662.921
+script = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control/Dialog_box"]
+visible = false
+anchor_left = 0.5
+anchor_top = 2.264
+anchor_right = 0.5
+anchor_bottom = 2.264
+margin_left = -497.498
+margin_top = -849.448
+margin_right = 490.502
+margin_bottom = -692.448
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Dialog_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 77.0
+margin_top = -454.0
+margin_right = -79.9963
+margin_bottom = -482.0
+grow_horizontal = 0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 8 )
+text = "Aperte x ou enter"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Control/Dialog_box"]
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="Control"]
+stream = ExtResource( 2 )
+attenuation = 0.378929
+
+[node name="dialogue_timer" type="Timer" parent="Control"]
+wait_time = 2.0
+one_shot = true
+
+[node name="transition" type="AnimationPlayer" parent="."]
+anims/event = SubResource( 9 )
+anims/transition = SubResource( 10 )
+
+[connection signal="timeout" from="Control/dialogue_timer" to="Control/Dialog_box" method="_on_dialogue_timer_timeout"]

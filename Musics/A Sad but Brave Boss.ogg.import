@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/A Sad but Brave Boss.ogg-1f53ad83f9632e7eda0877c9e67aeb87.oggstr"
+
+[deps]
+
+source_file="res://Musics/A Sad but Brave Boss.ogg"
+dest_files=[ "res://.import/A Sad but Brave Boss.ogg-1f53ad83f9632e7eda0877c9e67aeb87.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

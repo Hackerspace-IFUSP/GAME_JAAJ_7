@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/menu_101.wav-01d8774b2cbb16243cbe32e7d84260bc.sample"
+
+[deps]
+
+source_file="res://Diologo/sfx/menu_101.wav"
+dest_files=[ "res://.import/menu_101.wav-01d8774b2cbb16243cbe32e7d84260bc.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop=true
+compress/mode=0

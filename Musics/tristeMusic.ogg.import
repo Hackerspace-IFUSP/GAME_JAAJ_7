@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tristeMusic.ogg-b523dd34b6774e18ebad41b92db2cc29.oggstr"
+
+[deps]
+
+source_file="res://Musics/tristeMusic.ogg"
+dest_files=[ "res://.import/tristeMusic.ogg-b523dd34b6774e18ebad41b92db2cc29.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

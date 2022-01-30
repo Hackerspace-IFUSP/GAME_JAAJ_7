@@ -1,0 +1,522 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://assets/room-spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/room/OverPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/pc.png" type="Texture" id=3]
+[ext_resource path="res://assets/particle.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/room/Room.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/room/Terminal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Musics/ImagineThisPlayingOnAnElevator.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Fonts/gui.tres" type="DynamicFont" id=9]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 14, 14, 0, 14, 0, 0, 14, 0 )
+
+[sub_resource type="TileSet" id=2]
+1/name = "floor"
+1/texture = ExtResource( 1 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 129, 33, 14, 14 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "wall"
+2/texture = ExtResource( 1 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 145, 33, 14, 14 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 1 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10.6778, 10 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 8.0
+flag_disable_z = true
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.992157, 0.458824, 0.945098, 1 )
+hue_variation_random = 0.59
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 31.1176, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 31.732, 15.5543 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 10, 15.849 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 8.0168, 7.44574 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 30.6754, 15.5056 )
+
+[sub_resource type="RectangleShape2D" id=10]
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 30.5726, 32.6537 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 2.79942, 6.2289 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 36
+font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=14]
+resource_name = "event"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("the_room:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("the_room:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Theme" id=15]
+default_font = ExtResource( 9 )
+
+[node name="Room" type="Node2D"]
+modulate = Color( 0, 0, 0, 1 )
+script = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -180.0
+margin_top = -92.0
+margin_right = 388.0
+margin_bottom = 252.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Bond" type="TileMap" parent="Tiles"]
+tile_set = SubResource( 2 )
+cell_size = Vector2( 14, 14 )
+cell_quadrant_size = 14
+collision_mask = 2
+format = 1
+tile_data = PoolIntArray( -196609, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 2, 0, -262140, 2, 0, -262139, 2, 0, -262138, 2, 0, -262137, 2, 0, -262136, 2, 0, -262135, 2, 0, -262134, 2, 0, -262133, 2, 0, -262132, 2, 0, -262131, 2, 0, -262130, 2, 0, -262129, 2, 0, -262128, 2, 0, -131073, 2, 0, -196608, 2, 0, -196607, 2, 0, -196606, 2, 0, -196605, 2, 0, -196604, 2, 0, -196603, 2, 0, -196602, 2, 0, -196601, 2, 0, -196600, 2, 0, -196599, 2, 0, -196598, 2, 0, -196597, 2, 0, -196596, 2, 0, -196595, 2, 0, -196594, 2, 0, -196593, 2, 0, -196592, 2, 0, -65537, 2, 0, -131072, 2, 0, -131071, 2, 0, -131070, 2, 0, -131069, 2, 0, -131068, 2, 0, -131067, 2, 0, -131066, 2, 0, -131065, 2, 0, -131064, 2, 0, -131063, 2, 0, -131062, 2, 0, -131061, 2, 0, -131060, 2, 0, -131059, 2, 0, -131058, 2, 0, -131057, 2, 0, -131056, 2, 0, -1, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, -65533, 2, 0, -65532, 2, 0, -65531, 2, 0, -65530, 2, 0, -65529, 2, 0, -65528, 2, 0, -65527, 2, 0, -65526, 2, 0, -65525, 2, 0, -65524, 2, 0, -65523, 2, 0, -65522, 2, 0, -65521, 2, 0, -65520, 2, 0, 65535, 2, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 2, 0, 131071, 2, 0, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 1, 0, 65552, 2, 0, 196607, 2, 0, 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 1, 0, 131082, 1, 0, 131083, 1, 0, 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 131087, 1, 0, 131088, 2, 0, 262143, 2, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0, 196619, 1, 0, 196620, 1, 0, 196621, 1, 0, 196622, 1, 0, 196623, 1, 0, 196624, 2, 0, 327679, 2, 0, 262144, 1, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0, 262158, 1, 0, 262159, 1, 0, 262160, 2, 0, 393215, 2, 0, 327680, 1, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 1, 0, 327696, 2, 0, 458751, 2, 0, 393216, 1, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 1, 0, 393232, 2, 0, 524287, 2, 0, 458752, 1, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 2, 0, 589823, 2, 0, 524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 1, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0, 524304, 2, 0, 655359, 2, 0, 589824, 1, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 1, 0, 589835, 1, 0, 589836, 1, 0, 589837, 1, 0, 589838, 1, 0, 589839, 1, 0, 589840, 2, 0, 720895, 2, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 2, 0, 786431, 2, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 720909, 1, 0, 720910, 1, 0, 720911, 1, 0, 720912, 2, 0, 851967, 2, 0, 786432, 1, 0, 786433, 1, 0, 786434, 1, 0, 786435, 1, 0, 786436, 1, 0, 786437, 1, 0, 786438, 1, 0, 786439, 1, 0, 786440, 1, 0, 786441, 1, 0, 786442, 1, 0, 786443, 1, 0, 786444, 1, 0, 786445, 1, 0, 786446, 1, 0, 786447, 1, 0, 786448, 2, 0, 917503, 2, 0, 851968, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 851974, 1, 0, 851975, 1, 0, 851976, 1, 0, 851977, 1, 0, 851978, 1, 0, 851979, 1, 0, 851980, 1, 0, 851981, 1, 0, 851982, 1, 0, 851983, 1, 0, 851984, 2, 0, 983039, 2, 0, 917504, 2, 0, 917505, 2, 0, 917506, 2, 0, 917507, 2, 0, 917508, 2, 0, 917509, 2, 0, 917510, 2, 0, 917511, 2, 0, 917512, 2, 0, 917513, 2, 0, 917514, 2, 0, 917515, 2, 0, 917516, 2, 0, 917517, 2, 0, 917518, 2, 0, 917519, 2, 0, 917520, 2, 0 )
+
+[node name="OverPlayer" parent="." instance=ExtResource( 2 )]
+position = Vector2( 108, 80 )
+z_index = 2
+collision_layer = 2
+collision_mask = 3
+
+[node name="Furniture" type="Node2D" parent="."]
+
+[node name="Door" type="Sprite" parent="Furniture"]
+position = Vector2( 25.5, -24 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 63.8669, 96, 23.3772, 49 )
+
+[node name="Area2D" type="Area2D" parent="Furniture/Door"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Door/Area2D"]
+position = Vector2( 0, 33.705 )
+shape = SubResource( 3 )
+
+[node name="Particles2D" type="Particles2D" parent="Furniture/Door/Area2D"]
+scale = Vector2( 1.5, 1.5 )
+amount = 12
+process_material = SubResource( 4 )
+texture = ExtResource( 4 )
+
+[node name="Shelf" type="StaticBody2D" parent="Furniture"]
+position = Vector2( 191.53, -3.14031 )
+collision_mask = 2
+
+[node name="Shelf" type="Sprite" parent="Furniture/Shelf"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 80, 64, 65 )
+
+[node name="Area2D" type="Area2D" parent="Furniture/Shelf/Shelf"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Shelf/Shelf/Area2D"]
+position = Vector2( 0, 43 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Shelf"]
+position = Vector2( 0.629974, 14.9354 )
+shape = SubResource( 6 )
+
+[node name="Windows" type="Sprite" parent="Furniture"]
+position = Vector2( 224.099, 83.6692 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 156, 48, 4, 32 )
+
+[node name="Area2D" type="Area2D" parent="Furniture/Windows"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Windows/Area2D"]
+position = Vector2( -11.7984, 0 )
+shape = SubResource( 7 )
+
+[node name="Particles2D" type="Particles2D" parent="Furniture/Windows/Area2D"]
+scale = Vector2( 1.5, 1.5 )
+amount = 12
+process_material = SubResource( 4 )
+texture = ExtResource( 4 )
+
+[node name="Sofa" type="StaticBody2D" parent="Furniture"]
+position = Vector2( 46.1225, 107.602 )
+collision_mask = 2
+
+[node name="Sprite" type="Sprite" parent="Furniture/Sofa"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 1, 32, 31 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Furniture/Sofa"]
+polygon = PoolVector2Array( -8.375, 15, -15.1432, 15.0346, -15.0689, -3.24943, -14.2513, -8.52654, -5.40655, -15.2158, 5.81659, -15.0672, 15.2559, -8.22924, 15.4046, 15.2576, 9.68152, 15.1833, 9.97882, -3.24944, 3.95846, -10.6077, -2.3592, -10.682, -8.60254, -3.32376 )
+
+[node name="Area2D" type="Area2D" parent="Furniture/Sofa"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Sofa/Area2D"]
+position = Vector2( 0.187286, 2.99661 )
+shape = SubResource( 8 )
+
+[node name="Particles2D" type="Particles2D" parent="Furniture/Sofa/Area2D"]
+scale = Vector2( 1.5, 1.5 )
+amount = 12
+process_material = SubResource( 4 )
+texture = ExtResource( 4 )
+
+[node name="GlassTable" type="StaticBody2D" parent="Furniture"]
+position = Vector2( 45.3846, 179.536 )
+collision_mask = 2
+
+[node name="Sprite" type="Sprite" parent="Furniture/GlassTable"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 96, 0, 64, 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/GlassTable"]
+shape = SubResource( 9 )
+
+[node name="TV" type="Sprite" parent="Furniture/GlassTable"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 112, 78, 16, 15 )
+
+[node name="Area2D" type="Area2D" parent="Furniture/GlassTable/TV"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/GlassTable/TV/Area2D"]
+position = Vector2( 0, -26 )
+shape = SubResource( 10 )
+
+[node name="Particles2D" type="Particles2D" parent="Furniture/GlassTable/TV/Area2D"]
+scale = Vector2( 1.5, 1.5 )
+amount = 12
+process_material = SubResource( 4 )
+texture = ExtResource( 4 )
+
+[node name="Table" type="StaticBody2D" parent="Furniture"]
+position = Vector2( 191.8, 154.561 )
+collision_mask = 2
+
+[node name="Sprite" type="Sprite" parent="Furniture/Table"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 64, 68 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture/Table"]
+shape = SubResource( 11 )
+
+[node name="Mat" type="Sprite" parent="Furniture"]
+position = Vector2( 108.879, 83.6234 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 96, 112, 48, 48 )
+
+[node name="Stool" type="Sprite" parent="Furniture"]
+position = Vector2( 147.604, 174.543 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 16, 22 )
+
+[node name="Stool2" type="Sprite" parent="Furniture"]
+position = Vector2( 147.604, 146.481 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 16, 22 )
+
+[node name="PC" type="Node2D" parent="."]
+
+[node name="PC" type="Area2D" parent="PC"]
+position = Vector2( 167.916, 146.934 )
+z_index = 1
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="PC/PC"]
+position = Vector2( 0, -1.11362 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PC/PC"]
+position = Vector2( -13.2337, 2.80428 )
+shape = SubResource( 12 )
+
+[node name="Particles2D" type="Particles2D" parent="PC/PC"]
+scale = Vector2( 1.5, 1.5 )
+amount = 12
+process_material = SubResource( 4 )
+texture = ExtResource( 4 )
+
+[node name="PCSCreen" type="CanvasLayer" parent="PC"]
+layer = 0
+
+[node name="PopupPanel" parent="PC/PCSCreen" instance=ExtResource( 6 )]
+
+[node name="Sprite" parent="PC/PCSCreen/PopupPanel/TextureRect/Bowser/Responsavel/HBoxContainer/Player/Player" index="0"]
+frame = 0
+
+[node name="the_room" type="Label" parent="."]
+margin_left = -176.0
+margin_top = 72.0
+margin_right = 400.0
+margin_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0.709804, 1, 0, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Sala de Casa"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/event = SubResource( 14 )
+
+[node name="GUI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Control" type="Control" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.629974
+margin_bottom = -0.630005
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Control"]
+anchor_right = 1.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 0, 30 )
+custom_constants/separation = 30
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Control/HBoxContainer"]
+margin_right = 734.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="GUI/Control/HBoxContainer/HBoxContainer"]
+margin_right = 92.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 9 )
+text = "menu"
+
+[node name="Mes" type="Label" parent="GUI/Control/HBoxContainer"]
+margin_left = 764.0
+margin_top = 5.0
+margin_right = 824.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 9 )
+text = "Mes"
+
+[node name="Week" type="Label" parent="GUI/Control/HBoxContainer"]
+margin_left = 854.0
+margin_top = 5.0
+margin_right = 934.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 9 )
+text = "Week"
+
+[node name="Exp" type="Label" parent="GUI/Control/HBoxContainer"]
+margin_left = 964.0
+margin_top = 5.0
+margin_right = 1024.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 9 )
+text = "Exp"
+
+[node name="Dialog" type="PopupPanel" parent="GUI/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 312.0
+margin_top = 350.0
+margin_right = -312.0
+rect_min_size = Vector2( 400, 250 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Control/Dialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 250, 0 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/Control/Dialog/HBoxContainer"]
+margin_right = 250.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 250, 200 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 9 )
+text = "Gostaria de gastar o dia se inspirando?"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Control/Dialog/HBoxContainer"]
+margin_left = 254.0
+margin_right = 354.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 30
+alignment = 1
+
+[node name="Sim" type="Button" parent="GUI/Control/Dialog/HBoxContainer/VBoxContainer"]
+margin_top = 115.0
+margin_right = 100.0
+margin_bottom = 141.0
+custom_fonts/font = ExtResource( 9 )
+text = "Sim"
+
+[node name="Não" type="Button" parent="GUI/Control/Dialog/HBoxContainer/VBoxContainer"]
+margin_top = 59.0
+margin_right = 100.0
+margin_bottom = 85.0
+custom_fonts/font = ExtResource( 9 )
+text = "Não"
+
+[node name="PopupPanel" type="PopupPanel" parent="GUI/Control"]
+visible = true
+margin_right = 8.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 300, 200 )
+theme = SubResource( 15 )
+popup_exclusive = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Control/PopupPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sair" type="Button" parent="GUI/Control/PopupPanel/VBoxContainer"]
+margin_top = 65.0
+margin_right = 292.0
+margin_bottom = 91.0
+text = "Sair"
+
+[node name="Voltar" type="Button" parent="GUI/Control/PopupPanel/VBoxContainer"]
+margin_top = 101.0
+margin_right = 292.0
+margin_bottom = 127.0
+text = "Voltar"
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[connection signal="body_entered" from="Furniture/Door/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Furniture/Door/Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Furniture/Windows/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Furniture/Sofa/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Furniture/GlassTable/TV/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="PC/PC" to="." method="_on_PC_body_entered"]
+[connection signal="pressed" from="PC/PCSCreen/PopupPanel/TextureRect/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="GUI/Control/HBoxContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="GUI/Control/Dialog/HBoxContainer/VBoxContainer/Sim" to="." method="_on_Sim_pressed"]
+[connection signal="pressed" from="GUI/Control/Dialog/HBoxContainer/VBoxContainer/Não" to="." method="_on_No_pressed"]
+[connection signal="pressed" from="GUI/Control/PopupPanel/VBoxContainer/Sair" to="." method="_on_Sair_pressed"]
+[connection signal="pressed" from="GUI/Control/PopupPanel/VBoxContainer/Voltar" to="." method="_on_Voltar_pressed"]
+
+[editable path="PC/PCSCreen/PopupPanel"]

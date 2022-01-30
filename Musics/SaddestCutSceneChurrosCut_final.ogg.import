@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SaddestCutSceneChurrosCut_final.ogg-d385ad04d281dffb423d8007bf3a314c.oggstr"
+
+[deps]
+
+source_file="res://Musics/SaddestCutSceneChurrosCut_final.ogg"
+dest_files=[ "res://.import/SaddestCutSceneChurrosCut_final.ogg-d385ad04d281dffb423d8007bf3a314c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

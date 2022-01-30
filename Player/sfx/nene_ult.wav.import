@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/nene_ult.wav-73d48d89141249e3adf107172d561c11.sample"
+
+[deps]
+
+source_file="res://Player/sfx/nene_ult.wav"
+dest_files=[ "res://.import/nene_ult.wav-73d48d89141249e3adf107172d561c11.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
